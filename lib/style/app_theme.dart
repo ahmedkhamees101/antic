@@ -3,6 +3,11 @@ import 'package:todo/style/constants.dart';
 
 class MyTheme {
   static ThemeData lightTheme = ThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      selectedItemColor: Colors.blueAccent,
+      unselectedItemColor: Colors.grey.shade700
+    ),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,

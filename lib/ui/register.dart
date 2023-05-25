@@ -4,7 +4,6 @@ import 'package:todo/components/custom_text_field.dart';
 import 'package:todo/style/constants.dart';
 import 'package:todo/ui/login.dart';
 import 'package:todo/ui/uitls/dialg-uitls.dart';
-import 'package:todo/ui/login.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = 'register';
@@ -119,11 +118,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         register();
-                           if(nameController.text.isNotEmpty&&emailController.text.isNotEmpty
-                               &&passwordController.text.isNotEmpty
-                               &&confirmPassController.text.isNotEmpty){
-                             Navigator.pushNamed(context, LoginScreen.routeName);
-                           }
+                        if (nameController.text.isNotEmpty &&
+                            emailController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty &&
+                            confirmPassController.text.isNotEmpty) {
+                        }
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -144,7 +143,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -155,33 +153,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   register() async {
-
     if (formKey.currentState?.validate() == false) {
       return;
     }
     DialogUtils.loadingDialog(context, "loading...");
     try {
-       await authServes.createUserWithEmailAndPassword(
+      await authServes.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       DialogUtils.hideDialog(context);
-      DialogUtils.showMessage(context, "successful registration",posActionName: "ok",posActions: (){
+      DialogUtils.showMessage(context, "successful registration",
+          posActionName: "ok", posActions: () {
         Navigator.pushReplacementNamed(context, LoginScreen.routeName);
       });
     } on FirebaseAuthException catch (e) {
       DialogUtils.hideDialog(context);
-      String errorMessage ='SomeThing Went Wrong';
+      String errorMessage = 'SomeThing Went Wrong';
       if (e.code == 'weak-password') {
         errorMessage = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
         errorMessage = 'The account already exists for that email';
       }
-      DialogUtils.showMessage(context, errorMessage,navActionName: "Try Again",);
-
+      DialogUtils.showMessage(
+        context,
+        errorMessage,
+        navActionName: "Try Again",navAction: (){
+          DialogUtils.hideDialog(context);
+      }
+      );
     } catch (e) {
       DialogUtils.hideDialog(context);
-      String errorMessage ='SomeThing Went Wrong';
-      DialogUtils.showMessage(context, errorMessage,navActionName: "Try Again",navAction: (){
-        register();
+      String errorMessage = 'SomeThing Went Wrong';
+      DialogUtils.showMessage(context, errorMessage, navActionName: "Try Again",
+          navAction: () {
+            DialogUtils.hideDialog(context);
       });
     }
   }

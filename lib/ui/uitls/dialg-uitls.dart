@@ -30,7 +30,7 @@ class DialogUtils {
       actions.add(TextButton(
           onPressed: () {
             hideDialog(context);
-            // posActions?.call();
+             posActions?.call();
           },
           child: Text(posActionName)));
     }
@@ -38,6 +38,7 @@ class DialogUtils {
       actions.add(TextButton(
           onPressed: () {
             hideDialog(context);
+            navAction?.call();
           },
           child: Text(navActionName)));
     }

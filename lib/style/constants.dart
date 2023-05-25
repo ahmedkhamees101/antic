@@ -7,6 +7,7 @@ class MyColor{
   static const Color mainBackGround = Color(0xFFDFECDB);
   static const Color buttonBackGround = Color(0xFFBDBDBD);
   static const Color createAccount = Color(0xFF505050);
+  static const Color titles = Color(0xFF000101);
 }
 
 class Validation{

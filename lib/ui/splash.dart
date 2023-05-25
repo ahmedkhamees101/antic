@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:todo/ui/register.dart';
+import 'package:flutter/material.dart';
+import 'package:todo/ui/login.dart';
 
-import 'login.dart';
 
 class SplashScreen extends StatelessWidget {
 static const String routeName ='splash';
@@ -9,12 +9,15 @@ static const String routeName ='splash';
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 2),
       (){
-        Navigator.pushReplacementNamed(context, LoginScreen.routeName) ;
+      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
       }
     );
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/images/splash.png',),fit: BoxFit.cover)
+      width: 100,
+      height: 100,
+      decoration:  BoxDecoration(
+        color:Colors.white,
+        image: DecorationImage(image: AssetImage('assets/images/splash1.jpg',))
       ),
     );
   }
